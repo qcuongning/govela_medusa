@@ -29,7 +29,7 @@ module.exports = defineConfig({
     vite: (config: any) => {
       config.server = {
         ...config.server,
-        allowedHosts: ["govela.shop"],
+        allowedHosts: ["govela.vn", "admin.govela.vn"],
       }
       return config
     },
