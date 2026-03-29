@@ -65,6 +65,7 @@ export default async function orderPlacedHandler({
     `
 
     try {
+        const totalFormatted = order.total != null ? Number(order.total).toFixed(2) : "N/A"
         await transporter.sendMail({
             from: '"Govela" <support@govela.vn>',
             to: recipient,
@@ -81,7 +82,7 @@ export default async function orderPlacedHandler({
             <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
               <h2 style="font-size: 18px; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px;">Order Summary</h2>
               <p><strong>Order ID:</strong> #${orderId}</p>
-              <p><strong>Total Amount:</strong> ${order.total.toFixed(2)} ${currency}</p>
+              <p><strong>Total Amount:</strong> ${totalFormatted} ${currency}</p>
             </div>
             
             <p>${isManual 
