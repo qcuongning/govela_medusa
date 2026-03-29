@@ -7,6 +7,9 @@ import {
 } from "@medusajs/framework/utils"
 import { getApp, getApps, initializeApp, cert, App } from "firebase-admin/app"
 import { getAuth } from "firebase-admin/auth"
+import path from "path"
+
+console.log(`[Firebase Auth] Provider module file evaluated at ${__filename}`)
 
 type InjectedDependencies = {
   logger: Logger
@@ -34,6 +37,8 @@ class FirebaseAuthService extends AbstractAuthModuleProvider {
     this.logger_ = logger
     this.options_ = options
     this.app_ = null
+    
+    this.logger_.info("[Firebase Auth] Provider service instantiated.")
   }
 
   async register(data: any, authIdentityService: any) {
@@ -158,6 +163,11 @@ class FirebaseAuthService extends AbstractAuthModuleProvider {
     ).replace(/\\n/g, "\n")
 
     if (!projectId || !clientEmail || !privateKey) {
+      this.logger_.error("[Firebase Auth] Missing required environment variables.", {
+        hasProjectId: !!projectId,
+        hasClientEmail: !!clientEmail,
+        hasPrivateKey: !!privateKey
+      })
       throw new Error(
         "Firebase auth provider requires FIREBASE_SERVICE_ACCOUNT_JSON or FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY."
       )

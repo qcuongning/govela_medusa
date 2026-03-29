@@ -1,6 +1,12 @@
 import { loadEnv, defineConfig } from '@medusajs/framework/utils'
 
-loadEnv(process.env.NODE_ENV || 'development', process.cwd())
+const envMode = process.env.NODE_ENV || 'development'
+loadEnv(envMode, process.cwd())
+
+// Ensure .env is loaded as a fallback if mode-specific env is missing
+if (envMode !== 'development') {
+  loadEnv('development', process.cwd())
+}
 
 module.exports = defineConfig({
   modules: [
@@ -13,7 +19,7 @@ module.exports = defineConfig({
             id: "emailpass",
           },
           {
-            resolve: "./src/providers/firebase-auth",
+            resolve: "./src/providers/firebase-auth.ts",
             id: "firebase",
           },
         ],
