@@ -27,6 +27,7 @@
     "@medusajs/framework": "2.12.5",
     "@medusajs/medusa": "2.12.5",
     "@medusajs/payment-stripe": "^2.12.5",
+    "firebase-admin": "^13.7.0",
     "nodemailer": "^8.0.4"
   },
   "devDependencies": {

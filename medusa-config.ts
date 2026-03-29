@@ -5,6 +5,21 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 module.exports = defineConfig({
   modules: [
     {
+      resolve: "@medusajs/medusa/auth",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/auth-emailpass",
+            id: "emailpass",
+          },
+          {
+            resolve: "./src/providers/firebase-auth",
+            id: "firebase",
+          },
+        ],
+      },
+    },
+    {
       resolve: "./src/modules/amadeus",
       dependencies: ["cache"],
     },
